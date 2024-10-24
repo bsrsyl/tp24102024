@@ -8,6 +8,9 @@ pipeline {
     environment {
         fileName = 'file.txt'
         username = 'Achille'
+        REPOSITORY = 'https://github.com/bsrsyl/tp24102024.git'
+        BRANCHE = "main"
+        EMAIL = "sylvain.bousseron@gmail.com"
     }
     
     parameters {
@@ -19,29 +22,32 @@ pipeline {
     stages {
         stage('initialisation') {
              steps {
-            sh "echo 'File ${params.file}'"
-            sh "echo 'Extension ${params.extension}'"
-            sh "echo 'Content ${params.content}'"
-            sh "printenv"
+               sh "printenv"
+               git url:"${REPOSITORY}", branch: "${BRANCH}"              
+                sh "echo 'File ${params.file}'"
+               sh "echo 'Extension ${params.extension}'"
+             sh "echo 'Content ${params.content}'"
+            
              }
         }
-        stage('build') {
-            when {
-                allOf { expression { params.file}
-                       expression { params.extension}
-                       expression { params.content}
-                    }
-            }
-            steps {
-                sh "echo '${params.content}' > ${params.file}.${params.extension}"
-            }
+   stage('create file') {
+             steps {
+             sh "echo '${params.content}' > ${params.file}.${params.extension}"
+            
+             }
         }
+
         
-        stage('test') {
+        stage('Update commits') {
             steps {
-                sh 'ls -al'
                 sh '''
-                    npm --version
+                    git status
+                    git  config user.email ${env.EMAIL}
+                    git  config user.name ${env.USER_NAME}
+
+                    git add .
+                    git commit -am "Fichier  ${params.file}.${params.extension}"
+                    git push origin "${BRANCH}"
                 '''
             }
         }
