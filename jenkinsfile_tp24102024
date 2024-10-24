@@ -29,10 +29,11 @@ pipeline {
             when {
                 allOf { expression { params.file}
                        expression { params.extension}
+                       expression { params.content}
                     }
             }
             steps {
-                sh "echo 'Hello ${env.username}' > ${params.file}.${params.extension}'"
+                sh "echo '${env.content}' > ${params.file}.${params.extension}'"
             }
         }
         
