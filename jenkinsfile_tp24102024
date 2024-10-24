@@ -26,8 +26,9 @@ pipeline {
              }
         }
         stage('build') {
-            when (
+            when {
                 environment name: "file",  value : "index"
+            }
             steps {
                 sh "echo 'Hello ${env.username}' > ${params.file}.${params.extension}'"
             }
