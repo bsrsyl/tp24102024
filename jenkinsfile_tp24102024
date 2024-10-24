@@ -23,7 +23,7 @@ pipeline {
         stage('initialisation') {
              steps {
                sh "printenv"
-               git url:"${REPOSITORY}", branch: "${BRANCH}"              
+               git url:"${REPOSITORY}", branch: "${BRANCHE}"              
                 sh "echo 'File ${params.file}'"
                sh "echo 'Extension ${params.extension}'"
              sh "echo 'Content ${params.content}'"
@@ -47,7 +47,7 @@ pipeline {
 
                     git add .
                     git commit -am "Fichier  ${params.file}.${params.extension}"
-                    git push origin "${BRANCH}"
+                    git push origin "${BRANCHE}"
                 '''
             }
         }
