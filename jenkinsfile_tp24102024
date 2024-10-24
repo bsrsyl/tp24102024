@@ -33,7 +33,7 @@ pipeline {
                     }
             }
             steps {
-                sh "echo '${env.content} > ${params.file}.${params.extension}'"
+                sh "echo '${params.content}' > ${params.file}.${params.extension}"
             }
         }
         
