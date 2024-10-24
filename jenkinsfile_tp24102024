@@ -6,8 +6,7 @@ pipeline {
     }
     
     environment {
-        fileName = 'file.txt'
-        username = 'Achille'
+        USER_NAME = 'bsrsyl'
         REPOSITORY = 'https://github.com/bsrsyl/tp24102024.git'
         BRANCHE = "main"
         EMAIL = "sylvain.bousseron@gmail.com"
