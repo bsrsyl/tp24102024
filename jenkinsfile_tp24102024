@@ -13,6 +13,7 @@ pipeline {
         string( name: "file")
         text(name:"content", description:"saisir le contenu du fichier")
         choice(name: "extension", choices:['txt', 'docx'])
+        booleanParam(name: "netlify", defaultValue: false, description : 'je souhaite envoyer le fichier sur netlify.com' 
     }
 
     stages {
@@ -34,11 +35,18 @@ pipeline {
                }
         }
    stage('create file') {
-        when {
-              expression { return params.file.equals("when") }
-          }
              steps {
              sh "echo '${params.content}' > ${params.file}.${params.extension}"
+            
+             }
+        }
+
+   stage('netlifly') {
+        when {
+              expression { return true == params.netlify }
+          }
+             steps {
+             sh "echo 'faudrait envoyer  ${params.file}.${params.extension} sur netlifly"
             
              }
         }
