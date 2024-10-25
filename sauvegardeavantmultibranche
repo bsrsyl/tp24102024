@@ -1,0 +1,67 @@
+pipeline {
+    agent any     
+    environment {
+        USER_NAME = 'bsrsyl'
+        REPOSITORY = 'https://github.com/bsrsyl/tp24102024.git'
+        BRANCHE = "main"
+        EMAIL = "sylvain.bousseron@gmail.com"
+        GIT_CREDENTIALS_ID = 'tokengithubsylvain'
+    }
+    
+    parameters {
+        string( name: "file")
+        text(name:"content", description:"saisir le contenu du fichier")
+        choice(name: "extension", choices:['txt', 'docx'])
+    }
+
+    stages {
+        stage('initialisation') {
+             steps {
+               sh "printenv"
+               git url:"${REPOSITORY}", branch: "${BRANCHE}"              
+                sh "echo 'File ${params.file}'"
+               sh "echo 'Extension ${params.extension}'"
+             sh "echo 'Content ${params.content}'"
+            
+             }
+        }
+   stage('create file') {
+             steps {
+             sh "echo '${params.content}' > ${params.file}.${params.extension}"
+            
+             }
+        }
+
+        
+        stage('Update commits') {
+            steps {
+                 withCredentials([
+                   gitUsernamePassword(
+                     credentialsId: ${env.GIT_CREDENTIALS_ID},
+                     gitToolName: 'Default'
+                      )
+                 ]) {
+                sh """
+                    git status
+                    cat jenkinsfile_tp24102024
+                    git  config user.email ${env.EMAIL}
+                    git  config user.name ${env.USER_NAME}
+
+                    git add .
+                    git status
+                    
+                    git commit -am "Fichier  ${params.file}.${params.extension}"
+                    git push origin "${BRANCHE}"
+                """
+                }
+            }
+        }
+        
+        
+        stage('check') {
+            steps {
+                sh 'ls -al'
+            }
+        }
+    }
+}
