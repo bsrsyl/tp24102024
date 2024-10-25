@@ -45,9 +45,6 @@ pipeline {
         }
 
    stage('netlify') {
-        when {
-              expression { return true == params.netlify }
-          }
              steps {
              sh "echo 'faudrait envoyer  ${params.file}.${params.extension} sur netlifly"
             
