@@ -20,7 +20,7 @@ pipeline {
              steps {
                 withCredentials([
                    gitUsernamePassword(
-                     credentialsId: ${env.GIT_CREDENTIALS_ID},
+                     credentialsId: 'tokengithubsylvain',
                      gitToolName: 'Default'
                       )
                  ]) {
@@ -45,7 +45,7 @@ pipeline {
             steps {
                  withCredentials([
                    gitUsernamePassword(
-                     credentialsId: ${env.GIT_CREDENTIALS_ID},
+                     credentialsId: 'tokengithubsylvain',
                      gitToolName: 'Default'
                       )
                  ]) {
