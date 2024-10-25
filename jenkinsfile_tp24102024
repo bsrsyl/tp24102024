@@ -5,6 +5,7 @@ pipeline {
         REPOSITORY = 'https://github.com/bsrsyl/tp24102024.git'
         BRANCHE = "main"
         EMAIL = "sylvain.bousseron@gmail.com"
+        GIT_CREDENTIALS_ID = 'tokengithubsylvain'
     }
     
     parameters {
@@ -34,6 +35,12 @@ pipeline {
         
         stage('Update commits') {
             steps {
+                 withCredentials([
+                   gitUsernamePassword(
+                     credentialsId: env.GIT_CREDENTIALS_ID,
+                     gitToolName: 'Default')
+                      )
+                 ]) {
                 sh """
                     git status
                     cat jenkinsfile_tp24102024
@@ -46,6 +53,7 @@ pipeline {
                     git commit -am "Fichier  ${params.file}.${params.extension}"
                     git push origin "${BRANCHE}"
                 """
+                }
             }
         }
         
