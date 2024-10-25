@@ -5,7 +5,8 @@ pipeline {
         REPOSITORY = 'https://github.com/bsrsyl/tp24102024.git'
         BRANCHE = "main"
         EMAIL = "sylvain.bousseron@gmail.com"
-        GIT_CREDENTIALS_ID = 'tokengithubsylvain'
+        GIT_CREDENTIALS_ID = credentials('tokengithubsylvain')
+        
     }
     
     parameters {
