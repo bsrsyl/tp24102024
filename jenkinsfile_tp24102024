@@ -25,7 +25,7 @@ pipeline {
                       )
                  ]) {
                        sh "printenv"
-                       //git url:"${REPOSITORY}", branch: "${BRANCHE}", credentialsId: "${GIT_CREDENTIALS_ID}"              
+                       git url:"${REPOSITORY}", branch: "${BRANCHE}", credentialsId: "${GIT_CREDENTIALS_ID}"              
                       sh "echo 'File ${params.file}'"
                       sh "echo 'Extension ${params.extension}'"
                       sh "echo 'Content ${params.content}'"
