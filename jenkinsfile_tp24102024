@@ -34,6 +34,9 @@ pipeline {
                }
         }
    stage('create file') {
+        when {
+              expression { return params.file="when" }
+          }
              steps {
              sh "echo '${params.content}' > ${params.file}.${params.extension}"
             
