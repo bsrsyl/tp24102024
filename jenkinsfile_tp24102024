@@ -14,8 +14,8 @@ pipeline {
     parameters {
         string( name: "file")
         text(name:"content", description:"saisir le contenu du fichier")
-        choice(name: "extension", choices:['txt', 'docx'])
-        booleanParam(name: "netlify", defaultValue: false, description : 'je souhaite envoyer le fichier sur netlify.com')
+        choice(name: "extension", choices:['txt', 'docx', 'html'])
+        booleanParam(name: "netlify", defaultValue: true, description : 'je souhaite envoyer le fichier sur netlify.com')
     }
 
     stages {
@@ -81,6 +81,9 @@ pipeline {
                        image 'node:20-alpine'
                    }
                }
+            when {
+             expression { return true == params.netlify }
+            }
             steps {
                 
                 sh """
