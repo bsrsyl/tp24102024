@@ -17,13 +17,21 @@ pipeline {
     stages {
         stage('initialisation') {
              steps {
-               sh "printenv"
-               //git url:"${REPOSITORY}", branch: "${BRANCHE}"              
-                sh "echo 'File ${params.file}'"
-               sh "echo 'Extension ${params.extension}'"
-             sh "echo 'Content ${params.content}'"
+
+                withCredentials([
+                   gitUsernamePassword(
+                     credentialsId: ${env.GIT_CREDENTIALS_ID},
+                     gitToolName: 'Default'
+                      )
+                 ]) {
+                       sh "printenv"
+                       git url:"${REPOSITORY}", branch: "${BRANCHE}"              
+                      sh "echo 'File ${params.file}'"
+                      sh "echo 'Extension ${params.extension}'"
+                      sh "echo 'Content ${params.content}'"
             
-             }
+                    }
+               }
         }
    stage('create file') {
              steps {
