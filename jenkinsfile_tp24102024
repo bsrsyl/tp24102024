@@ -44,12 +44,7 @@ pipeline {
              }
         }
 
-   stage('netlify') {
-             steps {
-             sh "echo 'faudrait envoyer  ${params.file}.${params.extension} sur netlifly"
-            
-             }
-        }
+
 
         
         stage('Update commits') {
