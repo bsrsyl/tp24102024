@@ -40,6 +40,7 @@ pipeline {
    stage('create file') {
              steps {
              sh "echo '${params.content}' > ${params.file}.${params.extension}"
+              sh "mkdir deploiement"
              sh "echo '${params.content}' > deploiement/${params.file}.${params.extension}"
             
              }
