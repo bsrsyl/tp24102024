@@ -34,7 +34,7 @@ pipeline {
         
         stage('Update commits') {
             steps {
-                sh '''
+                sh """
                     git status
                     cat jenkinsfile_tp24102024
                     git  config user.email ${env.EMAIL}
@@ -45,7 +45,7 @@ pipeline {
                     
                     git commit -am "Fichier  ${params.file}.${params.extension}"
                     git push origin "${BRANCHE}"
-                '''
+                """
             }
         }
         
