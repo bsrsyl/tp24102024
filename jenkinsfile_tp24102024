@@ -13,7 +13,7 @@ pipeline {
         string( name: "file")
         text(name:"content", description:"saisir le contenu du fichier")
         choice(name: "extension", choices:['txt', 'docx'])
-        booleanParam(name: "netlify", defaultValue: false, description : 'je souhaite envoyer le fichier sur netlify.com' 
+        booleanParam(name: "netlify", defaultValue: false, description : 'je souhaite envoyer le fichier sur netlify.com')
     }
 
     stages {
