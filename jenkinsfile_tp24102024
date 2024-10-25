@@ -50,7 +50,7 @@ pipeline {
                       )
                  ]) {
                 sh """
-                    git pull origin main
+                    git pull origin ${BRANCHE}
                     git status
                     cat jenkinsfile_tp24102024
                     git  config user.email ${env.EMAIL}
