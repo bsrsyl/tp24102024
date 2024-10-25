@@ -55,7 +55,7 @@ pipeline {
                     git  config user.email ${env.EMAIL}
                     git  config user.name ${env.USER_NAME}
 
-                    git add .
+                    git add ${params.file}.${params.extension}
                     git status
                     
                     git commit -am "Fichier  ${params.file}.${params.extension}"
