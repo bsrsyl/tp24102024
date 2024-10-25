@@ -6,6 +6,8 @@ pipeline {
         BRANCHE = "main"
         EMAIL = "sylvain.bousseron@gmail.com"
         GIT_CREDENTIALS_ID = credentials('tokengithubsylvain')
+        NETLIFY_SITE_ID =  'ID17c09aa9-24fd-4de4-b71c-f6b48faa52e7'
+        NETLIFY_AUTH_TOKEN = credentials('tokennetifly')
         
     }
     
@@ -42,7 +44,7 @@ pipeline {
              }
         }
 
-   stage('netlifly') {
+   stage('netlify') {
         when {
               expression { return true == params.netlify }
           }
@@ -79,9 +81,19 @@ pipeline {
         }
         
         
-        stage('check') {
+        stage('deploy') {
+              agent { 
+                docker {
+                       image 'node:20-alpine'
+                   }
+               }
             steps {
-                sh 'ls -al'
+                
+                sh """
+                   npm install netlify-cli --save-dev
+                   ls -al
+                """
+           
             }
         }
     }
