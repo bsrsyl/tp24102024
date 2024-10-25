@@ -75,7 +75,9 @@ pipeline {
         }
         
         
-        stage('deploy') {
+        
+
+ stage('deploy') {
               agent { 
                 docker {
                        image 'node:20-alpine'
@@ -87,18 +89,26 @@ pipeline {
             steps {
                 
                 sh """
-                   npm install  netlify-cli 
+                   //npm install  netlify-cli 
                    ls -al
                    //netlify status
-                    node_modules/.bin/netlify status
-                    node_modules/.bin/netlify deploy --dir=deploiement --prod
+                    //node_modules/.bin/netlify status
+                    //node_modules/.bin/netlify deploy --dir=deploiement --prod
                    //netlify deploy --dir=deploiement --prod
-                    node_modules/.bin/netlify status
+                    //node_modules/.bin/netlify status
                    //netlify status
-                   ls -al
+                   //ls -al
                 """
            
             }
         }
     }
+  post {
+    always {  echo 'always'
+    }
+    success { echo 'success'
+    }
+    failure { echo 'failure'
+    }
+  }
 }
