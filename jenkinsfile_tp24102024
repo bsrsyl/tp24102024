@@ -107,8 +107,8 @@ pipeline {
   }
   post {
     always {  echo 'always'  
-              ls -al
-              rm -rf *
+              sh "ls -al"
+              sh "rm -rf *"
     }
     success { echo 'success'
     }
