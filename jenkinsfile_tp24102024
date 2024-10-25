@@ -32,7 +32,7 @@ pipeline {
                       sh "echo 'File ${params.file}'"
                       sh "echo 'Extension ${params.extension}'"
                       sh "echo 'Content ${params.content}'"
-                      sh "echo 'branche d'exécution ${env.BRANCH_NAME}'"
+                      //sh "echo 'branche d'exécution ${env.BRANCH_NAME}'"
             
                     }
                }
