@@ -37,7 +37,7 @@ pipeline {
             steps {
                  withCredentials([
                    gitUsernamePassword(
-                     credentialsId: env.GIT_CREDENTIALS_ID,
+                     credentialsId: ${env.GIT_CREDENTIALS_ID},
                      gitToolName: 'Default'
                       )
                  ]) {
